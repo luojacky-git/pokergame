@@ -5,7 +5,7 @@ const port = process.env.PORT || 30000;
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.tsx",
+  entry: "./src/index.jsx",
   output: {
     filename: "bundle.[hash].js",
     path: path.resolve(__dirname, "dist"),
@@ -19,21 +19,12 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: ["ts-loader"],
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              localsConvention: "camelCase",
-              sourceMap: true,
-            },
-          },
-        ],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
